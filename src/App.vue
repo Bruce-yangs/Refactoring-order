@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <headers class="header">
-      <!--I am header-->
-    </headers>
+  <div  id="app">
+    <headers class="header" :seller="seller"></headers>
     <div class="tab">
       <!--<router-link to="/goods" class="tab-item">商品</router-link>
       <router-link to="/ratings" class="tab-item">评论</router-link>
@@ -24,7 +22,7 @@
 
 <script>
   import headers from 'com/header/header'
-
+  const ERR_OK = 0;
   export default {
     data() {
       return {
@@ -35,14 +33,23 @@
           label: '评论'
         }, {
           label: '商家'
-        }]
+        }],
+        seller: {}
       }
+    },
+    created() {
+      this.$axios.get("/seller").then(res => {
+        if (res.data.errno === ERR_OK) {
+          this.seller = res.data.data;
+          console.log(this.seller)
+        }
+      })
     },
     methods: {
       clickHandler(label) {
         switch (label) {
           case '商品':
-            this.$router.push('/Goods');
+            this.$router.push('/');
             break;
           case '评论':
             this.$router.push('/Ratings');
@@ -51,7 +58,7 @@
             this.$router.push('/Seller');
             break;
           default:
-            this.$router.push('/Goods');
+            this.$router.push('/');
             break;
         }
         console.log(label)
@@ -70,6 +77,7 @@
       width 100%
       height 40px
       line-height 40px
+      border-bottom 1px solid rgba(7,17,27,.1)
       .tab-item
         flex 1
         text-align center

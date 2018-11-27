@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import 'common/stylus/index.styl';
+
 // By default we import all the components.
 // Only reserve the components on demand and remove the rest.
 // Style is always required.
