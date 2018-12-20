@@ -13,7 +13,7 @@
           {{seller.description}}/{{seller.deliveryTime}}分钟送达
         </div>
         <div class="support" v-if="seller.supports">
-          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
+          <icons :currentType="seller.supports[0].type" :size="0" class="icon-img"></icons>
           <span class="text" v-text="seller.supports[0].description"></span>
         </div>
       </div>
@@ -42,7 +42,7 @@
             <lines :text="saleTitle"></lines>
             <ul v-if="seller.supports" class="supports">
               <li v-for="(item,index) in seller.supports" class="support-item">
-                <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+                 <icons :currentType="seller.supports[index].type" :size="1" class="icon-show"></icons>
                 <span class="text">{{seller.supports[index].description}}</span>
               </li>
             </ul>
@@ -63,6 +63,7 @@
 <script>
   import star from 'com/star/star'
   import lines from 'com/line/line'
+  import icons from 'com/icon/icon'
   export default {
     props: {
       seller: {
@@ -75,7 +76,7 @@
         msg: 'Welcome to Your Vue.js App',
         toastTxt: 'cube toast content',
         classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
-        detailShow: true,
+        detailShow: false,
         saleTitle: '优惠信息',
         trafficker: '商家公告',
       }
@@ -97,13 +98,12 @@
       }
     },
     components: {
-      star,lines
+      star,lines,icons
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" >
   @import 'common/stylus/mixin';
   .header
     position relative
@@ -127,7 +127,7 @@
           .brand
             display inline-block
             vertical-align top
-            width 30px
+            width 38px
             height 18px
             bg-image('brand')
             background-size 30px 18px
@@ -142,24 +142,11 @@
           line-height 12px
           font-size 12px
         .support
-          .icon
-            display inline-block
+          .icon-img
             width 12px
             height 12px
             margin-right 4px
-            background-size 12px 12px
-            background-repeat no-repeat
-            vertical-align top
-            &.decrease
-              bg-image('decrease_1')
-            &.discount
-              bg-image('discount_1')
-            &.guarantee
-              bg-image('guarantee_1')
-            &.invoice
-              bg-image('invoice_1')
-            &.special
-              bg-image('special_1')
+            background-size: 12px 12px
           .text
             font-size 10px
             line-height 12px
@@ -250,19 +237,6 @@
             margin-top 18px
             padding 2px 0
             text-align center
-          /*.title
-            display flex
-            width 80%
-            margin 28px auto 24px auto
-            .line
-              flex 1
-              position relative
-              top -6px
-              border-bottom 1px solid rgba(255,255,255,.2)
-            .text
-              font-size 14px
-              font-weight 700
-              padding 0 12px*/
           .supports
             width 80%
             margin 0 auto
@@ -272,24 +246,8 @@
               font-size 0
               &:last-child
                 margin-bottom 0
-              .icon
-                display inline-block
-                width 16px
-                height 16px
+              .icon-show
                 margin-right 6px
-                background-size 16px 16px
-                background-repeat no-repeat
-                vertical-align top
-                &.decrease
-                  bg-image('decrease_2')
-                &.discount
-                  bg-image('discount_2')
-                &.guarantee
-                  bg-image('guarantee_2')
-                &.invoice
-                  bg-image('invoice_2')
-                &.special
-                  bg-image('special_2')
               .text
                 line-height 16px
                 font-size 12px

@@ -5,7 +5,7 @@
     <div class="line"></div>
   </div>
 </template>
-<script type="text/ecmascript-6">
+<script type="text/ecmascript-6" >
   export default {
     props: {
       text: {//文案
@@ -15,7 +15,7 @@
   }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
   .title
     display flex
     width 80%
